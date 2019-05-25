@@ -1,0 +1,11 @@
+import {createStore,applyMiddleware} from 'redux';
+import reducer from './reducers';
+import createSagaMiddleware from '../redux-saga';
+import AutoSaga from './saga/AutoSaga';
+// import counterSaga from './saga/counterSaga';
+let sagaMiddleware = createSagaMiddleware();
+let store = applyMiddleware(sagaMiddleware)(createStore)(reducer);
+sagaMiddleware.run(AutoSaga);
+// sagaMiddleware.run(counterSaga);
+window.store = store;
+export default store;
